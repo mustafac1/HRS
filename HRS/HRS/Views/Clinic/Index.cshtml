@@ -1,0 +1,94 @@
+﻿@model HRS.ViewModel.ClinicViewModel
+@{
+    ViewData["Title"] = "Klinik";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom red-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Klinik Ekleme Sayfası</h2>
+        <ol class="breadcrumb red-bg">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Klinik Ekle</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Klinik Ekleme Formu</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Add", "Clinic", FormMethod.Post))
+                    {
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Klinik Adı</label>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Örn: Acil Servis" class="form-control m-b" name="Name">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> Kaydet</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Klinik Tablosu</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Klinik Adı</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Clinics)
+                            {
+
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-danger btn-rounded btn-outline" href="@Url.Action("Delete","Clinic", new { item.Id })"><i class="fa fa-trash"></i> Sil</a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+﻿@model HRS.ViewModel.WorkersViewModel
+@{
+    ViewData["Title"] = "İşçi Bilgilerini Düzenleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom red-bg page-heading">
+    <div class="col-lg-10">
+        <h2>İşçi Bilgilerini Düzenleme Sayfası</h2>
+        <ol class="breadcrumb red-bg">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Workers")">İşçiler</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Düzenle</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>İşçi Ekleme Formu</h5>
+                </div>
+                <div class="ibox-content">
+
+                    @using (Html.BeginForm("Edit", "Workers", FormMethod.Post))
+                    {
+                    <input type="hidden"  asp-for="Id"/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="İşçi Adı"  asp-for="Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="İşçi Soyadı"  asp-for="Surname">
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control m-b" asp-for="Gender">
+                                    @if (Model.Gender == "E")
+                                    {
+                                        <option value="E" selected>Erkek</option>
+                                        <option value="K">Kadın</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="K" selected>Kadın</option>
+                                        <option value="E">Erkek</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" placeholder="İşçi Tc Kimlik Numarası"  asp-for="TcNo">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="İşçi Doğum Tarihi"  asp-for="DateOfBirth">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" placeholder="İşçi Telefon Numarası"  asp-for="Tel">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="İşçi Mail Adresi"  asp-for="Mail">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="Kullanıcı Adı"  asp-for="UserName">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="password" class="form-control" placeholder="Kullanıcı Şifre" value="@Model.Password" asp-for="Password">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="password" class="form-control" placeholder="Kullanıcı Şifre Tekrarı" name="confirmPassword">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-control m-b" asp-for="RoleId">
+
+                                    @foreach (var item in Model.Roles)
+                                    {
+
+                                        if (item.Id == Model.RoleId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> Kaydet</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

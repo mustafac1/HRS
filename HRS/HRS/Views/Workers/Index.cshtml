@@ -1,0 +1,95 @@
+﻿@model HRS.ViewModel.WorkersViewModel
+@{
+    ViewData["Title"] = "İşçiler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom red-bg page-heading">
+    <div class="col-lg-10">
+        <h2>İşçiler Sayfası</h2>
+        <ol class="breadcrumb red-bg">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>İşçiler</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="m-1 text-right">
+            <a class="btn btn-success btn-rounded btn-outline" href="@Url.Action("Add","Workers")"><i class="fa fa-user-plus"></i> İşçi Ekle</a>
+        </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>İşçiler Tablosu</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>İşçi Adı</th>
+                            <th>İşçi Soyadı</th>
+                            <th>İşçi Cinsiyet</th>
+                            <th>İşçi TC Kimlik Numarası</th>
+                            <th>İşçi Doğum Tarihi</th>
+                            <th>İşçi Tel</th>
+                            <th>İşçi Mail</th>
+                            <th>İşçi Kullanıcı Adı</th>
+                            <th>İşçi Grubu</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.WokerAndRoles)
+                        {
+                            <tr>
+                                <td>#</td>
+                                <td>@item.Name</td>
+                                <td>@item.Surname</td>
+                                <td>
+                                    @if (item.Gender == "E")
+                                    {
+                                        Write("Erkek");
+                                    }
+                                    else
+                                    {
+                                        Write("Kadın");
+                                    }
+                                </td>
+                                <td>@item.TcNo</td>
+                                <td>@item.DateOfBirth.ToShortDateString()</td>
+                                <td>@item.Tel</td>
+                                <td>@item.Mail</td>
+                                <td>@item.UserName</td>
+                                <td>@item.RolName</td>
+                                <td class="text-center"><a class="btn btn-info btn-rounded btn-outline" href="@Url.Action("Edit","Workers", new { workerid = item.Id })"><i class="fa fa-edit"></i> Düzenle</a></td>
+                                <td class="text-center"><a class="btn btn-danger btn-rounded btn-outline" href="@Url.Action("Delete","Workers",new { item.Id })"><i class="fa fa-trash"></i> Sil</a></td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

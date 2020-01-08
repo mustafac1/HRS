@@ -1,0 +1,83 @@
+﻿@model HRS.ViewModel.DoktorsViewModel
+@{
+    ViewData["Title"] = "Doktor Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom red-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Doktor Bilgileri Ekleme Sayfası</h2>
+        <ol class="breadcrumb red-bg">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Doktor Bilgileri Ekle</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Doktor Ekleme Formu</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Add", "Doctors", FormMethod.Post))
+                    {
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <select class="form-control m-b" data-val="true" data-val-required="The RoleId field is required." name="WorkerId">
+                                    <option>-----Doktor Seçiniz-----</option>
+                                    @foreach (var item in Model.workerAndDoctors)
+                                    {
+                                        <option value="@item.Id">@item.Name @item.Surname</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <select class="form-control m-b" data-val="true" data-val-required="The RoleId field is required." name="ClinicId">
+                                    <option>-----Klinik Seçiniz-----</option>
+                                    @foreach (var item in Model.Clinics)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <select class="form-control m-b" data-val="true" data-val-required="The RoleId field is required." name="Rank">
+                                    <option>-----Ünvan Seçiniz-----</option>
+                                    <option value="Baş Hekim">Baş Hekim</option>
+                                    <option value="Doçent">Doçent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> Kaydet</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
